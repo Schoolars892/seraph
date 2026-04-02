@@ -1,21 +1,5 @@
-name: Deploy to Bunny
-on:
-  push:
-    branches: [ main ]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build Site
-        run: |
-          npm install
-          npm run build # Ensure this creates a 'dist' folder
-      - name: Deploy to BunnyCDN
-        uses: ayeressian/bunnycdn-storage-deployer@v2.4.6
-        with:
-          source: "dist" # The folder to upload
-          storageZoneName: "${{ secrets.BUNNY_STORAGE_NAME }}"
-          storagePassword: "${{ secrets.BUNNY_STORAGE_PASSWORD }}"
-          upload: "true"
-          remove: "true" # Deletes old files not in the current build
+- name: Deploy Script to Bunny Edge Scripting
+  uses: BunnyWay/actions/deploy-script@main
+  with:
+    script_id: 70092
+    file: "script.ts"
